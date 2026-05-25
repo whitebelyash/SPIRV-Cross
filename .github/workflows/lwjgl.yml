@@ -34,11 +34,12 @@ jobs:
         mkdir build && cd build
         cmake .. -DCMAKE_TOOLCHAIN_FILE=../gcc-${{matrix.arch}}.cmake $SPVC_PARAMS
         make -j$(nproc)
+        strip libspirv-cross-c-shared.so
     - name: Upload
       uses: actions/upload-artifact@v7
       with:
         name: spvc-${{matrix.arch}}
-        path: libspirv-cross-c-shared.so
+        path: build/libspirv-cross-c-shared.so
         
         
       
