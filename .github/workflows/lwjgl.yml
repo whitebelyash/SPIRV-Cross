@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [ "arm64", "armv7", "x86", "x86_64" ]
+        arch: [ "arm64", "arm", "x86", "x86_64" ]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
         sudo apt install build-essential flex bison
     - name: Install toolchain
       run: |
-        wget https://github.com/MojoLauncher/gcc-toolchain/releases/download/prebuilt/gcc-13-x86_64-21.tar.xz -O toolchain.tar.xz
+        wget https://github.com/MojoLauncher/gcc-toolchain/releases/download/prebuilt/gcc-13-${{matrix.arch}}-21.tar.xz -O toolchain.tar.xz 2>/dev/null
         mkdir gcc
         tar xf toolchain.tar.xz -C gcc
         export PATH="$(pwd)/gcc/bin:$PATH"
